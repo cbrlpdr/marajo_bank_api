@@ -1,4 +1,4 @@
-const express = require('./config/_express')
+const express = require('./src/config/_express')
 
 const app = express()
 

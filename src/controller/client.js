@@ -1,7 +1,8 @@
 const express = require('express');
 const Client = require('../model/client');
-
 const router = express.Router();
+
+console.log(router);
 
 router.post('/client', async(req, res) => {
     try
