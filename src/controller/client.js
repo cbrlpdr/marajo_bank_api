@@ -29,7 +29,7 @@ router.post('/auth', async(req, res) => {
         return res.status(400).send({'error': 'Error during authentication, please check your credentials'});
     
     return res.status(200).send({
-        'message': 'Autentication successful!',
+        'message': 'Authentication successful!',
         'client': client
     })
 })
