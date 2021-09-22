@@ -1,10 +1,10 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const Client = require('../model/client');
+
 const router = express.Router();
 
-console.log(router);
-
-router.post('/client', async(req, res) => {
+router.post('/register', async(req, res) => {
     try
     {
         const client = await Client.create(req.body);
@@ -17,4 +17,18 @@ router.post('/client', async(req, res) => {
     }
 })
 
-module.exports = app => app.use("/register", router)
+router.post('/auth', async(req, res) => {
+    const { email, password } = req.body;
+    
+    const client = await Client.findOne({ email }).select('+password');
+    
+    if(!client)
+        return res.status(400).send({'error': 'Error during authentication, please check your credentials'});
+    
+    if(!await bcrypt.compare(password, client.password))
+        return res.status(400).send({'error': 'Error during authentication, please check your credentials'});
+    
+    return res.status(200).send({'message': 'Autentication successful!',})
+})
+
+module.exports = app => app.use("/client", router)
