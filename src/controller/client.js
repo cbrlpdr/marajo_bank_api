@@ -32,6 +32,19 @@ router.post('/auth', async(req, res) => {
         'message': 'Authentication successful!',
         'client': client
     })
-})
+});
+
+router.post('/deactivate', async(req, res) =>{
+    const { cpf } = req.body
+
+    const client = await Client.findOneAndUpdate(
+        { cpf: cpf }, 
+        { active: false });
+    
+    if(!client){
+        res.status(400).send({'error': 'Client not found'});
+    }
+
+});
 
 module.exports = app => app.use("/client", router)
