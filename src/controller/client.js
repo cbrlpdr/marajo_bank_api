@@ -28,7 +28,10 @@ router.post('/auth', async(req, res) => {
     if(!await bcrypt.compare(password, client.password))
         return res.status(400).send({'error': 'Error during authentication, please check your credentials'});
     
-    return res.status(200).send({'message': 'Autentication successful!',})
+    return res.status(200).send({
+        'message': 'Autentication successful!',
+        'client': client
+    })
 })
 
 module.exports = app => app.use("/client", router)
