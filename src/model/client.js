@@ -1,7 +1,6 @@
 const mongoose = require('../database/mongo');
 const bcrypt = require('bcryptjs');
 
-
 const ClientSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -27,6 +26,10 @@ const ClientSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    active: {
+        type: Boolean,
+        default: true
+    }
 });
 
 ClientSchema.pre('save', async function(next){
