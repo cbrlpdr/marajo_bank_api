@@ -15,7 +15,9 @@ const ClientSchema = new mongoose.Schema({
     cpf: {
         type: String,
         unique: true,
-        require: true
+        require: true,
+        minlength: 11,
+        maxlength: 11,
     },
     password: {
         type: String,
